@@ -1,0 +1,22 @@
+{
+  "name": "es6-app",
+  "version": "1.0.0",
+  "description": "A web app using ES6",
+  "main": "index.html",
+  "author": "Alexandra Stoica",
+  "license": "ISC",
+  "scripts": {
+    "dev": "lite-server"
+  },
+  "dependencies": {
+    "es-module-loader": "^1.2.1",
+    "jquery": "^3.1.1",
+    "lite-server": "^2.2.2",
+    "material-design-lite": "^1.2.1",
+    "systemjs": "^0.19.39",
+    "traceur": "0.0.111"
+  },
+  "devDependencies": {
+    "lite-server": "^2.2.0"
+  }
+}
