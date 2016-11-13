@@ -1,7 +1,11 @@
+import { AppBase } from './classes/app-base.js';
 import $ from 'jquery';
-import {Button} from './ui/button.js';
-import {NavBar} from './ui/navbar.js';
 
+export class App extends AppBase {
+  constructor(){
+    super('Title'); //pass title for appbase
+  }
+}
 
-let n = new NavBar();
-n.appendToElement($('body'));
+export let app = new App(); //export App instance to be able to reuse it within the app
+app.show($('body')); //call function show to generate ui and append to body

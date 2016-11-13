@@ -1,16 +1,15 @@
 import {AppBase} from '../classes/app-base.js';
 import $ from 'jquery';
 
-export class BaseElement extends AppBase {
-	
+export class BaseElement {
 	constructor() {
-		super();
-		this.element = null;
+		this.element = null;  // jQuery element
 	}
-	
+
 	appendToElement(el) {
 		this.createElement();
 		el.append(this.element);
+		this.enableJS();
 	}
 
 	createElement() {
@@ -18,8 +17,11 @@ export class BaseElement extends AppBase {
 		this.element = $(s);
 	}
 
-	getElementString() {
+	getElementString() { // override function in element
 		throw 'Please override getElementString() in BaseElement';
 	}
 
+	enableJS() {
+		componentHandler.upgradeElement(this.element[0]); // mdl's function for dynamic webapps
+	}
 }

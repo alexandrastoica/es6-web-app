@@ -1,41 +1,51 @@
-import {BaseElement} from './base-element.js';
+import { BaseElement } from './base-element.js';
 
 export class NavBar extends BaseElement {
 
-	constructor() {
+	constructor(title) {
 		super();
+		this.title = title;
+		this.links = []; //array for links in navbar
+	}
 
+	addLinks(title, href){
+		//add links to the array
+		this.links.push({
+			title,
+			href
+		});
 	}
 
 	getElementString() {
+		//generate string of navigation links containing the href and title passed
+		let links = '';
+		for(let link of this.links){
+			links += `<a class="mdl-navigation__link" href="${link.href}">${link.title}</a>\n`;
+		}
+
+		//append title and links to the ui
 		return `
-			<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header
-			            mdl-layout--fixed-tabs">
+			<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 			  <header class="mdl-layout__header">
 			    <div class="mdl-layout__header-row">
 			      <!-- Title -->
-			      <span class="mdl-layout-title">Title</span>
-			    </div>
-			    <!-- Tabs -->
-			    <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
-			      <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Tab 1</a>
-			      <a href="#fixed-tab-2" class="mdl-layout__tab">Tab 2</a>
-			      <a href="#fixed-tab-3" class="mdl-layout__tab">Tab 3</a>
+			      <span class="mdl-layout-title">${this.title}</span>
+			      <!-- Add spacer, to align navigation to the right -->
+			      <div class="mdl-layout-spacer"></div>
+			      <!-- Navigation. We hide it in small screens. -->
+			      <nav class="mdl-navigation mdl-layout--large-screen-only">
+							${links}
+			      </nav>
 			    </div>
 			  </header>
 			  <div class="mdl-layout__drawer">
-			    <span class="mdl-layout-title">Title</span>
+			    <span class="mdl-layout-title">${this.title}</span>
+			    <nav class="mdl-navigation">
+						${links}
+			    </nav>
 			  </div>
 			  <main class="mdl-layout__content">
-			    <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
-			      <div class="page-content"><!-- Your content goes here --></div>
-			    </section>
-			    <section class="mdl-layout__tab-panel" id="fixed-tab-2">
-			      <div class="page-content"><!-- Your content goes here --></div>
-			    </section>
-			    <section class="mdl-layout__tab-panel" id="fixed-tab-3">
-			      <div class="page-content"><!-- Your content goes here --></div>
-			    </section>
+			    <div class="page-content"><!-- Your content goes here --></div>
 			  </main>
 			</div>
 		`;
